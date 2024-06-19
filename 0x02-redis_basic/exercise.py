@@ -36,8 +36,8 @@ def call_history(method: Callable) -> Callable:
 
 def replay(fn: Callable) -> None:
     """ Check redis for how many times a function was called and display:
-        - How many times it was called
-        - Function args and output for each call
+    - How many times it was called
+    - Function args and output for each call
     """
     client = redis.Redis()
     calls = client.get(fn.__qualname__).decode('utf-8')
@@ -58,6 +58,8 @@ class Cache:
         """
         self._redis = redis.Redis()
         self._redis.flushdb()
+
+
     @call_history
     @count_calls
     def store(self, data: Union[str, bytes,  int,  float]) -> str:
